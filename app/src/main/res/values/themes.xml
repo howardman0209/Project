@@ -1,0 +1,97 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.Project" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <!--        <item name="android:windowBackground">#F8F8F8</item>-->
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <item name="android:colorBackground">@color/white</item>
+        <!--In general our UI do not support touch at the same time and thus we should not-->
+        <!--allow this from happening to prevent many unforeseeable issues-->
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/teal_700</item>
+        <item name="colorPrimaryVariant">@color/teal_200</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/purple_700</item>
+        <item name="colorSecondaryVariant">@color/purple_500</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/black</item><!--@android:color/transparent-->
+        <!-- Customize your theme here. -->
+        <item name="colorNeutral">@color/so_dark</item>
+        <item name="colorOnSurface">@color/so_dark</item>
+        <!--Button style-->
+        <item name="materialButtonStyle">@style/Widget.project.Button.Flat</item>
+
+        <item name="alphaEmphasisHigh">0.92</item>
+        <item name="alphaEmphasisMedium">0.64</item>
+        <item name="alphaEmphasisLow">0.24</item>
+        <item name="alphaEmphasisDisabled">0.12</item>
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/black</item>
+
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <!-- Required for animated icons -->
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Theme.Project</item>
+    </style>
+
+    <style name="Widget.project.Button.Flat" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:minHeight">@dimen/min_touch_area</item>
+        <item name="android:minWidth">@dimen/min_button_width</item>
+        <item name="android:paddingStart">@dimen/space_default</item>
+        <item name="android:paddingEnd">@dimen/space_default</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAppearance">?textAppearanceButton</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/space_quarter</item>
+
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="iconTint">@color/on_primary</item>
+        <item name="rippleColor">@color/neutral_emphasis_low</item>
+    </style>
+
+    <style name="Widget.project.Button.Flat.PrimaryVariant" parent="Widget.project.Button.Flat">
+        <item name="backgroundTint">?colorPrimaryVariant</item>
+    </style>
+
+    <style name="Widget.project.Button.Flat.Secondary" parent="Widget.project.Button.Flat">
+        <item name="backgroundTint">?colorSecondary</item>
+        <item name="android:textColor">?colorOnSecondary</item>
+        <item name="iconTint">?colorOnSecondary</item>
+    </style>
+
+    <style name="Widget.project.Button.Flat.Tertiary" parent="Widget.project.Button.Flat">
+        <item name="backgroundTint">@color/neutral</item>
+        <item name="android:textColor">@color/on_neutral</item>
+        <item name="iconTint">@color/on_neutral</item>
+        <item name="rippleColor">@color/on_neutral_emphasis_low</item>
+    </style>
+
+    <style name="Widget.project.Button.Flat.Error" parent="Widget.project.Button.Flat">
+        <item name="backgroundTint">@color/error</item>
+        <item name="android:textColor">@color/on_error</item>
+        <item name="iconTint">@color/on_error</item>
+    </style>
+</resources>

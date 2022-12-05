@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr format="color" name="colorApproval" />
+    <attr format="color" name="colorOnApproval" />
+    <attr format="color" name="colorNeutral" />
+    <attr format="color" name="colorOnNeutral" />
+
+    <attr format="reference" name="textAppearanceTextButton" />
+
+    <attr format="float" name="alphaEmphasisHigh" />
+    <attr format="float" name="alphaEmphasisMedium" />
+    <attr format="float" name="alphaEmphasisLow" />
+    <attr format="float" name="alphaEmphasisDisabled" />
+
+    <attr format="reference" name="textAppearanceTerms" />
+
+    <declare-styleable name="AccountSettingsInfoView">
+        <attr format="reference" name="account_settings_info_view_icon" />
+        <attr format="string" name="account_settings_info_view_title" />
+        <attr format="string" name="account_settings_info_view_value" />
+        <attr format="reference" name="account_settings_info_view_more" />
+    </declare-styleable>
+
+    <declare-styleable name="QuickLaunchItemView">
+        <attr format="color" name="quick_launch_item_round_background_color" />
+        <attr format="reference" name="quick_launch_item_image_res_id" />
+        <attr format="string" name="quick_launch_item_description" />
+    </declare-styleable>
+
+    <declare-styleable name="AcceptanceMarksView" />
+
+</resources>
