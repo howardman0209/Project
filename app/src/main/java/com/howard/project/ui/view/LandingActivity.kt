@@ -27,8 +27,8 @@ class LandingActivity : MVVMActivity<LandingViewModel, ActivityLandingBinding>()
 
     private fun switchTab(itemId: Int) {
         val fragment = when (itemId) {
-            R.id.bottom_nav_tab1 -> TestFragment()
-            R.id.bottom_nav_tab2 -> HomeFragment()
+            R.id.bottom_nav_tab1 -> HomeFragment()
+            R.id.bottom_nav_tab2 -> TestFragment()
             R.id.bottom_nav_tab3 -> TestFragment()
             R.id.bottom_nav_tab4 -> MoreFragment()
             else -> HomeFragment()
