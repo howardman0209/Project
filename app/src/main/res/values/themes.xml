@@ -2,15 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.Project" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">true</item>
-        <item name="android:windowFullscreen">false</item>
-        <!--        <item name="android:windowBackground">#F8F8F8</item>-->
-        <item name="android:navigationBarColor">@color/black</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <!--System/Platform attributes-->
+        <item name="android:windowLightStatusBar">true</item>
 
-        <item name="android:colorBackground">@color/white</item>
+        <!--<item name="android:windowBackground">?android:colorBackground</item>-->
+        <item name="android:statusBarColor">@color/so_dark</item>
+        <item name="android:navigationBarColor">@color/so_dark</item>
+
         <!--In general our UI do not support touch at the same time and thus we should not-->
         <!--allow this from happening to prevent many unforeseeable issues-->
         <item name="android:splitMotionEvents">false</item>
@@ -23,18 +21,26 @@
         <item name="colorSecondary">@color/purple_700</item>
         <item name="colorSecondaryVariant">@color/purple_500</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/black</item><!--@android:color/transparent-->
-        <!-- Customize your theme here. -->
+
         <item name="colorNeutral">@color/so_dark</item>
+        <item name="colorOnNeutral">@color/so_white</item>
+
+        <!-- Customize your theme here. -->
+        <item name="android:colorBackground">@color/so_white_variant</item>
+        <item name="colorOnBackground">@color/so_dark</item>
+
+        <item name="colorSurface">@color/so_white</item>
         <item name="colorOnSurface">@color/so_dark</item>
         <!--Button style-->
         <item name="materialButtonStyle">@style/Widget.project.Button.Flat</item>
 
+        <!--Color alpha-->
         <item name="alphaEmphasisHigh">0.92</item>
         <item name="alphaEmphasisMedium">0.64</item>
         <item name="alphaEmphasisLow">0.24</item>
         <item name="alphaEmphasisDisabled">0.12</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.Howard.BottomNavigationView</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
@@ -93,5 +99,12 @@
         <item name="backgroundTint">@color/error</item>
         <item name="android:textColor">@color/on_error</item>
         <item name="iconTint">@color/on_error</item>
+    </style>
+
+    <style name="Widget.Howard.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="elevation">@dimen/elevation_high</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemIconTint">@color/bottom_nav_item_csl</item>
+        <item name="itemTextColor">@color/bottom_nav_item_csl</item>
     </style>
 </resources>

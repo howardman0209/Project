@@ -12,14 +12,14 @@
 
     <item
         android:id="@+id/bottom_nav_tab2"
-        android:icon="@drawable/ic_baseline_compare_arrows_24"
+        android:icon="@drawable/ic_baseline_catching_pokemon_24"
         android:orderInCategory="100"
         android:title="@string/label_bottom_nav_tab2"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/bottom_nav_tab3"
-        android:icon="@drawable/ic_baseline_cloud_download_24"
+        android:icon="@drawable/ic_baseline_compare_arrows_24"
         android:orderInCategory="100"
         android:title="@string/label_bottom_nav_tab3"
         app:showAsAction="ifRoom" />

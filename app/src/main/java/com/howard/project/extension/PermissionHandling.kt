@@ -3,6 +3,7 @@ package com.howard.project.extension
 import android.Manifest
 import android.os.Build
 import android.view.View
+
 import com.howard.project.ui.model.PermissionResult
 import com.google.android.material.snackbar.Snackbar
 import com.howard.project.ui.base.BaseActivity

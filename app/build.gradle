@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.howard.project"
-        minSdk 23
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -46,6 +46,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    //ui related
+    implementation "com.akexorcist:localization:$localization_version" //change app locale
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
     implementation 'androidx.core:core-splashscreen:1.0.0'
@@ -62,4 +65,19 @@ dependencies {
 
     // Add the dependency for the Firebase Authentication library
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+    //rx
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+
+    //lifecycle
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    //LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    //optional - Test helpers for LiveData
+    testImplementation "androidx.arch.core:core-testing:$lifecycle_arch_version"
+    //Annotation processor
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
 }

@@ -1,8 +1,8 @@
 package com.howard.project.ui.base
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,15 +50,10 @@ abstract class BaseFragment : Fragment() {
         super.onAttach(context)
     }
 
-    fun showLoadingIndicator(isShowLoading: Boolean) {
-        baseActivity.showLoadingIndicator(isShowLoading)
-    }
-
     open fun setMainLayout(inflater: LayoutInflater, container: ViewGroup?): View {
         return inflater.inflate(getLayoutResId(), container, false)
     }
 
-    @SuppressLint("MissingPermission")
     @CallSuper
     override fun onResume() {
         super.onResume()
@@ -71,4 +66,42 @@ abstract class BaseFragment : Fragment() {
     abstract fun screenName(): String?
 
     open fun allowBackPress(): Boolean = true
+
+    fun showLoadingIndicator(isShowLoading: Boolean) {
+        baseActivity.showLoadingIndicator(isShowLoading)
+    }
+
+    // Prevent unintended double/ multiple click
+    class PreventFastDoubleClick() {
+        companion object {
+            private var lastClickTime: Long = 0
+
+            fun isFastDoubleClick(): Boolean {
+
+                //取得現在時間
+                val time = System.currentTimeMillis()
+                //timeD :上次點擊時間與現在時間的時間差
+                val timeD = time - lastClickTime
+                return if (timeD in 1..499) {
+                    //若小於0.5秒則判定是快速點擊
+                    true
+                } else {
+                    //若大於0.5秒，把現在時間設為上次點擊時間
+                    lastClickTime = time
+                    false
+                }
+            }
+
+        }
+    }
+
+    fun View.setSingleClickListener(action: () -> Unit) {
+        setOnClickListener {
+            if (!PreventFastDoubleClick.isFastDoubleClick()) {
+                action.invoke()
+            } else {
+                Log.d("Click Event", "== ! == Click Prevented")
+            }
+        }
+    }
 }

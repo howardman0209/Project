@@ -1,12 +1,9 @@
 package com.howard.project.ui.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
+import androidx.annotation.CallSuper
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.howard.project.extension.LIFECYCLE
-import com.howard.project.uiComponent.ProgressDialog
 
 abstract class MVVMActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : BaseActivity() {
     protected lateinit var viewModel: VM
@@ -15,7 +12,7 @@ abstract class MVVMActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : Bas
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(LIFECYCLE, "MVVMActivity onCreate")
+//        Log.d(LIFECYCLE, "MVVMActivity onCreate")
 
         viewModel = getViewModelInstance()
 
@@ -29,6 +26,20 @@ abstract class MVVMActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : Bas
 //        }
 
 
+    }
+
+    @CallSuper
+    override fun onDestroy() {
+        /**
+         * Dispose all disposables
+         */
+        viewModel.getDisposableList().forEach {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
+
+        super.onDestroy()
     }
 
     override fun setMainLayout() {

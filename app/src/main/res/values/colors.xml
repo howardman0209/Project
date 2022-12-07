@@ -5,7 +5,17 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+    <color name="so_coral_500">#FC7F5B</color>
+    <color name="so_coral_800">#D8684A</color>
+    <color name="so_blue_500">#4765FF</color>
+    <color name="so_blue_800">#4051AB</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="so_dark">#02152C</color>
+    <color name="so_dark_variant">#0E2642</color><!--dark surface-->
+    <color name="so_white">#FFFFFF</color>
+    <color name="so_white_variant">#F8FAFF</color>
+    <color name="so_transparent">#00FFFFFF</color>
 </resources>

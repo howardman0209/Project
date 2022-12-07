@@ -12,26 +12,31 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.akexorcist.localizationactivity.ui.LocalizationActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.howard.project.R
-import com.howard.project.extension.LIFECYCLE
 import com.howard.project.extension.TAG
 import com.howard.project.ui.model.PermissionRequest
 import com.howard.project.ui.model.PermissionResult
+import com.howard.project.ui.view.LoginActivity
 import com.howard.project.uiComponent.ProgressDialog
+import io.reactivex.disposables.Disposable
 
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : LocalizationActivity() {
     private val permCallbackMap = mutableMapOf<Int, PermissionResult.() -> Unit>()
     lateinit var progressDialog: AlertDialog
+    private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(LIFECYCLE, "BaseActivity onCreate")
+//        Log.d(LIFECYCLE, "BaseActivity onCreate")
 
         setMainLayout()
         layoutInflater.inflate(R.layout.activity_base, findViewById(android.R.id.content))
@@ -49,6 +54,22 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(getLayoutResId())
     }
 
+    @LayoutRes
+    abstract fun getLayoutResId(): Int
+
+    @IdRes
+    open fun getMainFragmentContainer(): Int? = null
+
+    @CallSuper
+    override fun onDestroy() {
+        progressDialog.dismiss()
+
+        if (disposable?.isDisposed == false) {
+            disposable?.dispose()
+        }
+        permCallbackMap.clear()
+        super.onDestroy()
+    }
 
     inline fun requirePermissions(
         permissions: Array<out String>,
@@ -135,6 +156,21 @@ abstract class BaseActivity : AppCompatActivity() {
             }
     }
 
+    fun backToLogin() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Logout")
+            .setPositiveButton("Confirm") { _, _ ->
+//                LoginManager.clearUserSession()
+
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP) {
             val v = currentFocus
@@ -205,9 +241,9 @@ abstract class BaseActivity : AppCompatActivity() {
             fun isFastDoubleClick(): Boolean {
 
                 //取得現在時間
-                var time = System.currentTimeMillis()
+                val time = System.currentTimeMillis()
                 //timeD :上次點擊時間與現在時間的時間差
-                var timeD = time - lastClickTime
+                val timeD = time - lastClickTime
                 return if (timeD in 1..499) {
                     //若小於0.5秒則判定是快速點擊
                     true
@@ -230,6 +266,4 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
     }
-
-    abstract fun getLayoutResId(): Int
 }

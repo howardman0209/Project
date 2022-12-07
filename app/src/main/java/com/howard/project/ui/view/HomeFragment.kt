@@ -16,4 +16,6 @@ class HomeFragment: MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_home
+
+    override fun screenName(): String = "HomeFragment"
 }

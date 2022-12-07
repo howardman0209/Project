@@ -15,4 +15,6 @@ class MoreFragment: MVVMFragment<MoreViewModel, FragmentMoreBinding>() {
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_more
+
+    override fun screenName(): String = "MoreFragment"
 }

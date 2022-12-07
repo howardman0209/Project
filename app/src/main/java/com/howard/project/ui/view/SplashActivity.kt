@@ -2,10 +2,8 @@ package com.howard.project.ui.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.howard.project.R
 import com.howard.project.databinding.ActivitySplashBinding
-import com.howard.project.extension.LIFECYCLE
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewModel.SplashViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +15,7 @@ class SplashActivity : MVVMActivity<SplashViewModel, ActivitySplashBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
 //        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        Log.d(LIFECYCLE, "SplashActivity onCreate")
+//        Log.d(LIFECYCLE, "SplashActivity onCreate")
         // Keep the splash screen visible for this Activity
 //        splashScreen.setKeepOnScreenCondition { true }
 //        startFirstActivity()

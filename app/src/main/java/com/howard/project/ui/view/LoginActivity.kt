@@ -18,7 +18,7 @@ import com.howard.project.ui.viewModel.LoginViewModel
 class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(LIFECYCLE, "LoginActivity onCreate")
+//        Log.d(LIFECYCLE, "LoginActivity onCreate")
         super.onCreate(savedInstanceState)
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -55,6 +55,7 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
     private fun onSuccessLogin(user: FirebaseUser?) {
         Log.w(TAG, "onSuccessLogin - User: $user")
         startActivity(Intent(this, LandingActivity::class.java))
+        this.finish()
     }
 
     private fun onFailLogin() {
