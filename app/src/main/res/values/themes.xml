@@ -34,6 +34,9 @@
         <!--Button style-->
         <item name="materialButtonStyle">@style/Widget.project.Button.Flat</item>
 
+        <!--Material type attributes-->
+        <item name="textAppearanceTextButton">@style/TextAppearance.Howard.Button</item>
+
         <!--Color alpha-->
         <item name="alphaEmphasisHigh">0.92</item>
         <item name="alphaEmphasisMedium">0.64</item>
@@ -118,7 +121,7 @@
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:maxLines">1</item>
-<!--        <item name="android:textAppearance">?textAppearanceTextButton</item>-->
+        <item name="android:textAppearance">?textAppearanceTextButton</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">@dimen/space_quarter</item>
 
@@ -140,4 +143,5 @@
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
+
 </resources>
