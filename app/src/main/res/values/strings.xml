@@ -1,11 +1,32 @@
 <resources>
     <string name="app_name">Project</string>
+
+<!--    common-->
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+
+<!--    bottom navigation tab label-->
     <string name="label_bottom_nav_tab1">tab1</string>
     <string name="label_bottom_nav_tab2">tab2</string>
     <string name="label_bottom_nav_tab3">tab3</string>
     <string name="label_bottom_nav_tab4">tab4</string>
 
+<!--    fragment label-->
+    <string name="label_fragment_test">TestFragment</string>
+    <string name="label_fragment_home">HomeFragment</string>
+    <string name="label_fragment_more">MoreFragment</string>
+
+
+<!--    text label-->
+    <string name="label_remember_me">Remember me</string>
+
+<!--    button text label-->
+    <string name="label_button_test">Test Button</string>
+
+<!--    notification channel id-->
+    <string name="notification_channel_id" translatable="false">notification_channel_id</string>
+
+    <!--    account type-->
+    <string name="account_type" translatable="false">howard_project</string>
 </resources>

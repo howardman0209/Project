@@ -22,8 +22,8 @@
             android:id="@+id/logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="40dp"
-            android:src="@drawable/ic_baseline_cloud_circle_24"
+            android:layout_margin="100dp"
+            android:src="@drawable/ic_baseline_fingerprint_24"
             android:tint="?colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/editLoginFragmentNameBox"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,19 +36,29 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:hint="@string/email"
-            app:endIconMode="clear_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp">
+            tools:layout_editor_absoluteX="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/loginFragmentName"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:inputType="textEmailAddress|textNoSuggestions"-->
+<!--                android:onTextChanged="@{viewModel::onEmailChanged}"-->
+<!--                android:text="@{viewModel.email}"-->
+<!--                tools:text="abcd@email.com" />-->
+            <AutoCompleteTextView
                 android:id="@+id/loginFragmentName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress|textNoSuggestions"
+                android:onItemClick="@{view::onUserSelected}"
                 android:onTextChanged="@{viewModel::onEmailChanged}"
                 android:text="@{viewModel.email}"
-                tools:text="abcd@email.com" />
+                tools:ignore="LabelFor"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -70,17 +80,28 @@
                 tools:text="ppp12345" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <CheckBox
+            android:id="@+id/cbSavePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.isSavePassword}"
+            android:text="@string/label_remember_me"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/editLoginFragmentPasswordBox"
+            app:layout_constraintTop_toBottomOf="@+id/editLoginFragmentPasswordBox"
+            tools:visibility="visible" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.enableLogin}"
             android:layout_margin="50dp"
+            android:enabled="@{viewModel.enableLogin}"
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editLoginFragmentPasswordBox"
-            tools:enabled="false"/>
+            tools:enabled="false" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

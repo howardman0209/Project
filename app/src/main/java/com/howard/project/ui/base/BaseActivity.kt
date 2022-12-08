@@ -26,6 +26,7 @@ import com.howard.project.ui.model.PermissionRequest
 import com.howard.project.ui.model.PermissionResult
 import com.howard.project.ui.view.LoginActivity
 import com.howard.project.uiComponent.ProgressDialog
+import com.howard.project.util.LoginManager
 import io.reactivex.disposables.Disposable
 
 
@@ -160,9 +161,9 @@ abstract class BaseActivity : LocalizationActivity() {
         MaterialAlertDialogBuilder(this)
             .setTitle("Logout")
             .setPositiveButton("Confirm") { _, _ ->
-//                LoginManager.clearUserSession()
+                LoginManager.clearUserSession()
 
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
             }
             .setNegativeButton("Cancel") { dialog, _ ->
@@ -170,6 +171,10 @@ abstract class BaseActivity : LocalizationActivity() {
             }
             .show()
     }
+
+    fun isLoggedIn() = LoginManager.user != null
+
+    fun accountType() = getString(R.string.account_type)
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP) {

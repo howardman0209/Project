@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.Howard" parent="" />
+
+    <style name="TextAppearance.Howard.Button">
+        <item name="android:textSize">@dimen/font_size_body_l</item>
+        <item name="android:letterSpacing">0.0075</item>
+        <item name="android:fontFeatureSettings">ss01,ss04</item>
+    </style>
+</resources>

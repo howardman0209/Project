@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="moreFragment"
+            android:text="@string/label_fragment_more"
             app:layout_constraintBottom_toBottomOf="parent" />
 
 
