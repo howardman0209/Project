@@ -112,7 +112,7 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     private fun bypassLogin() {
-        startActivity(Intent(this, LandingActivity::class.java))
+        startActivity(Intent(applicationContext, LandingActivity::class.java))
         this.finish()
     }
 
@@ -121,7 +121,7 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
         LoginManager.user = user
 
         Toast.makeText(baseContext, "Login Success", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, LandingActivity::class.java))
+        startActivity(Intent(applicationContext, LandingActivity::class.java))
         this.finish()
     }
 

@@ -163,7 +163,7 @@ abstract class BaseActivity : LocalizationActivity() {
             .setPositiveButton("Confirm") { _, _ ->
                 LoginManager.clearUserSession()
 
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
             }
             .setNegativeButton("Cancel") { dialog, _ ->

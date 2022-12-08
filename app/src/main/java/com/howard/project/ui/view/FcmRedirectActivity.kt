@@ -53,7 +53,7 @@ class FcmRedirectActivity : MVVMActivity<FcmRedirectViewModel, ActivityFcmRedire
                         val testData = FcmRedirectData.TestData(
                             testString = "FCM Redirect Test Data: $testDataMessage"
                         )
-                        Intent(this, TestActivity::class.java).apply {
+                        Intent(applicationContext, TestActivity::class.java).apply {
                             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             putExtra(BUNDLE_FCM_DATA, testData)
                         }
@@ -61,7 +61,7 @@ class FcmRedirectActivity : MVVMActivity<FcmRedirectViewModel, ActivityFcmRedire
                         val testData = FcmRedirectData.TestData(
                             testString = "FCM Redirect Test Data: $testDataMessage"
                         )
-                        Intent(this, SplashActivity::class.java).apply {
+                        Intent(applicationContext, SplashActivity::class.java).apply {
                             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             putExtra(BUNDLE_FCM_DATA, testData)
                         }
