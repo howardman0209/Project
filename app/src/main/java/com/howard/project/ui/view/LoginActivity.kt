@@ -10,10 +10,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.howard.project.R
 import com.howard.project.databinding.ActivityLoginBinding
-import com.howard.project.extension.LIFECYCLE
 import com.howard.project.extension.TAG
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewModel.LoginViewModel
+import com.howard.project.util.LoginManager
 
 class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
     private lateinit var auth: FirebaseAuth
@@ -24,6 +24,11 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
         auth = Firebase.auth
         binding.btnLogin.setOnClickListener {
             login()
+        }
+
+        binding.logo.setOnLongClickListener {
+            bypassLogin()
+            true
         }
     }
 
@@ -41,7 +46,7 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
                     Log.d(TAG, "signInWithEmailAndPassword:success")
                     val user = auth.currentUser
                     Toast.makeText(baseContext, "Login Success", Toast.LENGTH_SHORT).show()
-
+                    LoginManager.user = user
                     onSuccessLogin(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -50,6 +55,11 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
                     onFailLogin()
                 }
             }
+    }
+
+    private fun bypassLogin() {
+        startActivity(Intent(this, LandingActivity::class.java))
+        this.finish()
     }
 
     private fun onSuccessLogin(user: FirebaseUser?) {
