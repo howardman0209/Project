@@ -72,4 +72,8 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
         return localizationDelegate.getApplicationContext(super.getApplicationContext())
     }
 
+    /** Firebase Project Account:
+     * howarddevproject@gmail.com
+     * 240959747
+    */
 }

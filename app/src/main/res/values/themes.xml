@@ -107,4 +107,37 @@
         <item name="itemIconTint">@color/bottom_nav_item_csl</item>
         <item name="itemTextColor">@color/bottom_nav_item_csl</item>
     </style>
+
+    <style name="Widget.Howard.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:minHeight">@dimen/min_touch_area_dense</item>
+        <item name="android:minWidth">@dimen/min_button_width</item>
+        <item name="android:paddingStart">@dimen/space_half</item>
+        <item name="android:paddingEnd">@dimen/space_half</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:maxLines">1</item>
+<!--        <item name="android:textAppearance">?textAppearanceTextButton</item>-->
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/space_quarter</item>
+
+        <item name="android:textColor">@color/primary</item>
+        <item name="iconTint">@color/primary</item>
+        <item name="rippleColor">@color/primary_emphasis_low</item>
+    </style>
+
+    <style name="Widget.Howard.Button.TextButton.Tertiary" parent="Widget.Howard.Button.TextButton">
+        <item name="android:textColor">@color/neutral_emphasis_medium</item>
+        <item name="iconTint">@color/neutral_emphasis_medium</item>
+        <item name="rippleColor">@color/neutral_emphasis_low</item>
+    </style>
+
+    <style name="Widget.Howard.Button.TransparentBackground.Circle" parent="Widget.Howard.Button.TextButton.Tertiary">
+        <item name="android:minHeight">@dimen/min_touch_area_dense</item>
+        <item name="android:minWidth">@dimen/min_touch_area_dense</item>
+        <item name="minWidth">@null</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconSize">@dimen/icon_medium</item>
+    </style>
 </resources>

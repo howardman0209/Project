@@ -5,6 +5,8 @@ import android.accounts.AccountManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -16,6 +18,9 @@ import com.howard.project.extension.TAG
 import com.howard.project.extension.getSoepayAccountList
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewModel.LoginViewModel
+import com.howard.project.uiComponent.ArrayAdapterWithoutFiltering
+import com.howard.project.uiComponent.ArrayAdapterWithoutFiltering.OnDeleteClickListener
+import com.howard.project.uiComponent.ArrayAdapterWithoutFiltering.OnSelectClickListener
 import com.howard.project.util.LoginManager
 
 class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
@@ -31,7 +36,35 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
         // Initialize Firebase Auth
         auth = Firebase.auth
         loginAccountList = getSoepayAccountList()
+        loginAccountList.forEach { Log.d(TAG, "Saved user: ${it.name}") }
         autoFillInLoginCredential()
+
+        if (loginAccountList.isNotEmpty()) {
+            val accountNameList = loginAccountList.map { it.name }
+            binding.loginFragmentName.setAdapter(
+                ArrayAdapterWithoutFiltering(
+                    this, accountNameList,
+                    object : OnDeleteClickListener {
+                        override fun itemDelete(position: Int) {
+                            val deleteAccount = loginAccountList[position]
+                            accountManager.removeAccountExplicitly(deleteAccount)
+                            val removedAccountList = loginAccountList.toMutableList()
+                            removedAccountList.removeAt(position)
+                            loginAccountList = removedAccountList.toTypedArray()
+                            Log.d("DEBUG", "Fragment Account List $loginAccountList")
+                            binding.loginFragmentName.setText("", true)
+
+                        }
+                    },
+                    object : OnSelectClickListener {
+                        override fun itemSelect(position: Int) {
+                            Log.d("itemSelect", "position: $position, name: ${loginAccountList[position].name}")
+                            val selectedAccount = loginAccountList[position]
+                            binding.loginFragmentName.setText(selectedAccount.name)
+                        }
+                    }
+                ))
+        }
         Log.d(TAG, "loginAccountList $loginAccountList")
 
         binding.btnLogin.setOnClickListener {
@@ -128,6 +161,19 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
     private fun onFailLogin() {
         Log.w(TAG, "onFailLogin")
         Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+    }
+
+    fun onUserSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        val account = loginAccountList[position]
+        if (account.name.isNotEmpty()) {
+            if (viewModel.email.get() != account.name) {
+                val currentAccount = loginAccountList.findLast { it.name == viewModel.email.get() }
+                accountManager.setUserData(currentAccount, "password", "")
+                viewModel.isSavePassword.set(false)
+            } else {
+                viewModel.email.set(account.name)
+            }
+        }
     }
 
     override fun onStart() {

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "386842990623",
-    "project_id": "first-project-c4542",
-    "storage_bucket": "first-project-c4542.appspot.com"
+    "project_number": "203059677817",
+    "project_id": "project-1-723a3",
+    "storage_bucket": "project-1-723a3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:386842990623:android:7718ee152077c084c49d2a",
+        "mobilesdk_app_id": "1:203059677817:android:c1973f9ff14dd5254da2a8",
         "android_client_info": {
           "package_name": "com.howard.project"
         }
       },
       "oauth_client": [
         {
-          "client_id": "386842990623-o1rmugtf75fb8c2cs0lj7eocrtr3sdbp.apps.googleusercontent.com",
+          "client_id": "203059677817-5rj8lbuoq21g3bob041ljaab6ug1bvkk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCupHaYivytwILyi1mLMj_Cm3-xrOsS5T8"
+          "current_key": "AIzaSyAdhjF9YEO25BqvnWxPHfMOiF3yQQkO5Tg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "386842990623-o1rmugtf75fb8c2cs0lj7eocrtr3sdbp.apps.googleusercontent.com",
+              "client_id": "203059677817-5rj8lbuoq21g3bob041ljaab6ug1bvkk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
