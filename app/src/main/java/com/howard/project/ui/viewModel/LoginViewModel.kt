@@ -10,6 +10,7 @@ class LoginViewModel : BaseViewModel() {
     val password = ObservableField<String>()
     val email = ObservableField<String>()
     val enableLogin = ObservableBoolean()
+    val isSavePassword = ObservableBoolean(false)
 
     @Suppress("UNUSED_PARAMETER")
     fun onPasswordChanged(s: CharSequence, start: Int, before: Int, count: Int) {

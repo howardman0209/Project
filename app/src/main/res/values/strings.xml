@@ -17,9 +17,16 @@
     <string name="label_fragment_home">HomeFragment</string>
     <string name="label_fragment_more">MoreFragment</string>
 
+
+<!--    text label-->
+    <string name="label_remember_me">Remember me</string>
+
 <!--    button text label-->
     <string name="label_button_test">Test Button</string>
 
 <!--    notification channel id-->
     <string name="notification_channel_id" translatable="false">notification_channel_id</string>
+
+    <!--    account type-->
+    <string name="account_type" translatable="false">howard_project</string>
 </resources>

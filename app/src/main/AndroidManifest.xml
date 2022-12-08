@@ -61,6 +61,18 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
+        <service
+            android:name=".util.AccountAuthenticatorService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+
     </application>
 
 </manifest>

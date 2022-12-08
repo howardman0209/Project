@@ -174,6 +174,8 @@ abstract class BaseActivity : LocalizationActivity() {
 
     fun isLoggedIn() = LoginManager.user != null
 
+    fun accountType() = getString(R.string.account_type)
+
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP) {
             val v = currentFocus
