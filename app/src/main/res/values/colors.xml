@@ -18,4 +18,6 @@
     <color name="so_white">#FFFFFF</color>
     <color name="so_white_variant">#F8FAFF</color>
     <color name="so_transparent">#00FFFFFF</color>
+
+    <color name="nearlyTransparent">#6B000000</color>
 </resources>

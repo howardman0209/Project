@@ -1,0 +1,27 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <!--Bar code Scanner window-->
+    <com.journeyapps.barcodescanner.BarcodeView
+        android:id="@+id/zxing_barcode_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:zxing_framing_rect_height="240dp"
+        app:zxing_framing_rect_width="240dp"
+        />
+
+    <!--Full Camera Window with viewfinder-->
+    <!--here we want to use dark scrim all the time, ie using the base theme-->
+    <com.journeyapps.barcodescanner.ViewfinderView
+        android:id="@+id/zxing_viewfinder_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/Theme.Project"
+        app:zxing_possible_result_points="?colorPrimary"
+        app:zxing_result_view="?colorAccent"
+        app:zxing_viewfinder_laser="?colorPrimaryVariant"
+        app:zxing_viewfinder_mask="@color/nearlyTransparent"
+        />
+
+</merge>

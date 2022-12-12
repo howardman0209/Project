@@ -224,7 +224,7 @@ abstract class BaseActivity : LocalizationActivity() {
         action: PushFragmentAction = PushFragmentAction.Replace,
         isAddToBackStack: Boolean = true
     ) {
-        Log.d("DEBUG", "pushFragment")
+//        Log.d("DEBUG", "pushFragment")
         supportFragmentManager.beginTransaction().apply {
             if (action == PushFragmentAction.Replace) {
                 replace(containerId, fragment)

@@ -2,9 +2,10 @@
     <string name="app_name">Project</string>
 
 <!--    common-->
-    <string name="login">Login</string>
-    <string name="password">Password</string>
-    <string name="email">Email</string>
+    <string name="label_login">Login</string>
+    <string name="label_password">Password</string>
+    <string name="label_email">Email</string>
+    <string name="label_setting">Settings</string>
 
 <!--    bottom navigation tab label-->
     <string name="label_bottom_nav_tab1">tab1</string>
@@ -12,7 +13,8 @@
     <string name="label_bottom_nav_tab3">tab3</string>
     <string name="label_bottom_nav_tab4">tab4</string>
 
-<!--    fragment label-->
+<!--    activity / fragment label-->
+    <string name="label_activity_test">TestActivity</string>
     <string name="label_fragment_test">TestFragment</string>
     <string name="label_fragment_home">HomeFragment</string>
     <string name="label_fragment_more">MoreFragment</string>
@@ -24,16 +26,40 @@
 
 <!--    button text label-->
     <string name="label_button_test">Test Button</string>
+    <string name="label_button_test_1">Test Button 1</string>
+    <string name="label_button_test_2">Test Button 2</string>
+    <string name="label_button_test_3">Test Button 3</string>
+    <string name="label_button_test_4">Test Button 4</string>
+    <string name="label_button_test_5">Test Button 5</string>
+    <string name="label_button_test_6">Test Button 6</string>
+    <string name="label_button_test_7">Test Button 7</string>
+    <string name="label_button_test_8">Test Button 8</string>
+
     <string name="button_cancel">Cancel</string>
     <string name="button_confirm">Confirm</string>
     <string name="button_remove">Remove</string>
     <string name="button_dismiss">Dismiss</string>
     <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
+    <string name="button_request">Request</string>
+    <string name="button_gallery">Gallery</string>
+
+<!--    error-->
+    <string name="label_decode_image_fail">Fail to decode image</string>
 
 <!--    notification channel id-->
     <string name="notification_channel_id" translatable="false">notification_channel_id</string>
 
-    <!--    account type-->
+<!--    account type-->
     <string name="account_type" translatable="false">howard_project</string>
+
+<!--    rationale-->
+    <string name="label_rationale_location">"Allow location permission to perform transaction"</string>
+    <string name="label_rationale_bluetooth">"Allow device location permission to discover bluetooth device"</string>
+    <string name="label_rationale_phone_state">"Allow read phone state permission to get device’s serial number"</string>
+    <string name="label_rationale_camera">"Allow camera permission to take picture, barcode or QR code"</string>
+    <string name="label_rationale_file">"Allow files and media permission to save images to your device"</string>
+    <string name="label_rationale_file_read">"Allow read files and media permission to read images from your device"</string>
+    <string name="label_rationale_stats">"Allow permission to perform transaction"</string>
+    <string name="label_rationale_notification">"Allow device notification permission to push notification to your device"</string>
 </resources>

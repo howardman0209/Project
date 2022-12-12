@@ -80,4 +80,5 @@ dependencies {
     //Annotation processor
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
+    implementation "com.journeyapps:zxing-android-embedded:$zxing_android_version"
 }
