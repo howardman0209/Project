@@ -159,14 +159,14 @@ abstract class BaseActivity : LocalizationActivity() {
 
     fun backToLogin() {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Logout")
-            .setPositiveButton("Confirm") { _, _ ->
+            .setTitle(R.string.label_logout)
+            .setPositiveButton(R.string.button_confirm) { _, _ ->
                 LoginManager.clearUserSession()
 
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(R.string.button_cancel) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()

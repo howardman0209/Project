@@ -41,7 +41,7 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
 
         if (loginAccountList.isNotEmpty()) {
             val accountNameList = loginAccountList.map { it.name }
-            binding.loginFragmentName.setAdapter(
+            binding.loginName.setAdapter(
                 ArrayAdapterWithoutFiltering(
                     this, accountNameList,
                     object : OnDeleteClickListener {
@@ -52,7 +52,7 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
                             removedAccountList.removeAt(position)
                             loginAccountList = removedAccountList.toTypedArray()
                             Log.d("DEBUG", "Fragment Account List $loginAccountList")
-                            binding.loginFragmentName.setText("", true)
+                            binding.loginName.setText("", true)
 
                         }
                     },
@@ -60,7 +60,8 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
                         override fun itemSelect(position: Int) {
                             Log.d("itemSelect", "position: $position, name: ${loginAccountList[position].name}")
                             val selectedAccount = loginAccountList[position]
-                            binding.loginFragmentName.setText(selectedAccount.name)
+                            binding.loginName.setText(selectedAccount.name)
+                            fillInLoginCredential(selectedAccount.name)
                         }
                     }
                 ))
@@ -98,6 +99,22 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
                     onFailLogin()
                 }
             }
+    }
+
+    private fun fillInLoginCredential(email: String?) {
+        email?.let {
+            viewModel.email.set(it)
+            val account = loginAccountList.find { account -> account.name == it }
+            val accountPassword = try {
+                accountManager.getUserData(account, "password")
+            } catch (e: Exception) {
+                Log.d(TAG, "Get password error $e")
+                null
+            }
+            Log.d(TAG, "accountPassword: $accountPassword")
+            viewModel.password.set(accountPassword)
+            viewModel.isSavePassword.set(true)
+        }
     }
 
     private fun autoFillInLoginCredential() {

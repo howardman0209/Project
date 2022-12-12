@@ -28,21 +28,23 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         Log.d(LIFECYCLE, "${activity.javaClass.name} onCreated")
-        if (!activitiesAlive.contains(activity.javaClass.name))
+        if (!activitiesAlive.contains(activity.javaClass.name)){
             activitiesAlive.add(activity.javaClass.name)
+            Log.d(LIFECYCLE, activitiesAlive.toString())
+        }
     }
 
     override fun onActivityStarted(activity: Activity) {
-        Log.d(LIFECYCLE, "${activity.javaClass.name} onStarted")
+//        Log.d(LIFECYCLE, "${activity.javaClass.name} onStarted")
     }
 
     override fun onActivityResumed(activity: Activity) {
-        Log.d(LIFECYCLE, "${activity.javaClass.name} onResumed")
+//        Log.d(LIFECYCLE, "${activity.javaClass.name} onResumed")
         currentActiveActivity = activity
     }
 
     override fun onActivityPaused(activity: Activity) {
-        Log.d(LIFECYCLE, "${activity.javaClass.name} onPaused")
+//        Log.d(LIFECYCLE, "${activity.javaClass.name} onPaused")
         currentActiveActivity = null
     }
 
@@ -56,6 +58,7 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
 
     override fun onActivityDestroyed(activity: Activity) {
         Log.d(LIFECYCLE, "${activity.javaClass.name} onDestroyed")
+        activitiesAlive.remove(activity.javaClass.name)
     }
 
     override fun attachBaseContext(base: Context) {

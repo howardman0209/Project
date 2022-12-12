@@ -50,7 +50,7 @@
 <!--                android:text="@{viewModel.email}"-->
 <!--                tools:text="abcd@email.com" />-->
             <AutoCompleteTextView
-                android:id="@+id/loginFragmentName"
+                android:id="@+id/loginName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress|textNoSuggestions"
@@ -72,7 +72,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginFragmentPassword"
+                android:id="@+id/loginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

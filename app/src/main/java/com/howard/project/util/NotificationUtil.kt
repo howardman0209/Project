@@ -85,3 +85,14 @@ object NotificationUtil {
         displayNotification(context, largeIcon, message)
     }
 }
+
+/** Notification format
+{
+    "body": "NOTIFICATION body",
+    "title": "NOTIFICATION title",
+    "type": "NOTIFICATION_TYPE_type",
+    "data": {
+        "data_field": "data_content"
+    }
+}
+ */

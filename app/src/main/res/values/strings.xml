@@ -20,9 +20,16 @@
 
 <!--    text label-->
     <string name="label_remember_me">Remember me</string>
+    <string name="label_logout">Confirm logout?</string>
 
 <!--    button text label-->
     <string name="label_button_test">Test Button</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="button_remove">Remove</string>
+    <string name="button_dismiss">Dismiss</string>
+    <string name="button_login">Login</string>
+    <string name="button_logout">Logout</string>
 
 <!--    notification channel id-->
     <string name="notification_channel_id" translatable="false">notification_channel_id</string>
