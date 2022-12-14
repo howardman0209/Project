@@ -19,6 +19,7 @@ import com.howard.project.ui.base.BaseActivity
 import com.howard.project.ui.base.BaseFragment
 import com.howard.project.util.BUNDLE_CAMERA_SCANNER_RESULT
 import com.howard.project.util.CameraScannerDecodeUtil
+import com.howard.project.util.GalleryImageUtil
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.CaptureManager
@@ -38,10 +39,12 @@ class CameraScannerFragment : BaseFragment() {
     private val pickImageLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
+        if (result.data == null) return@registerForActivityResult
+
         if (result.resultCode == Activity.RESULT_OK) {
             val contentResolver = activity?.contentResolver
             contentResolver?.let {
-                val qr = CameraScannerDecodeUtil.scanCodeImage(CameraScannerDecodeUtil.getPicture(it, result.data?.data))
+                val qr = CameraScannerDecodeUtil.scanCodeImage(GalleryImageUtil.getPictureBitmap(it, result.data?.data))
                 if (qr == null) {
                     Snackbar.make(binding.root, getString(R.string.label_decode_image_fail), Snackbar.LENGTH_LONG).show()
                 } else {

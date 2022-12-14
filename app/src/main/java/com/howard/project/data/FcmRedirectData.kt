@@ -1,4 +1,4 @@
-package com.howard.project.ui.model
+package com.howard.project.data
 
 import java.io.Serializable
 

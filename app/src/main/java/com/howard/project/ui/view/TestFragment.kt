@@ -9,7 +9,6 @@ import com.howard.project.databinding.FragmentTestBinding
 import com.howard.project.extension.TAG
 import com.howard.project.ui.base.MVVMFragment
 import com.howard.project.ui.viewModel.TestViewModel
-import com.howard.project.util.NotificationUtil.testNotification
 
 class TestFragment : MVVMFragment<TestViewModel, FragmentTestBinding>() {
 
@@ -22,16 +21,8 @@ class TestFragment : MVVMFragment<TestViewModel, FragmentTestBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.testButton.setOnClickListener {
-            sendSampleNotification()
+            startActivity(Intent(requireContext(), TestActivity::class.java))
         }
-    }
-
-    private fun sendSampleNotification() {
-        testNotification(requireContext(), "hello world")
-    }
-
-    private fun startNewActivity() {
-        startActivity(Intent(requireContext(), TestActivity::class.java))
     }
 
     override fun getViewModelInstance(): TestViewModel = TestViewModel()

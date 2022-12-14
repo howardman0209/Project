@@ -6,8 +6,8 @@ import android.util.Log
 import com.howard.project.R
 import com.howard.project.databinding.ActivityFcmRedirectBinding
 import com.howard.project.ui.base.MVVMActivity
-import com.howard.project.ui.model.FcmRedirectData
-import com.howard.project.ui.model.FcmRedirectData.NotificationType
+import com.howard.project.data.FcmRedirectData
+import com.howard.project.data.FcmRedirectData.NotificationType
 import com.howard.project.ui.viewModel.FcmRedirectViewModel
 import com.howard.project.util.BUNDLE_FCM_DATA
 import com.howard.project.util.BUNDLE_FCM_NOTIFICATION_TYPE

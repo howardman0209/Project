@@ -11,7 +11,7 @@ import android.graphics.Color
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.howard.project.R
-import com.howard.project.ui.model.FcmRedirectData.NotificationType
+import com.howard.project.data.FcmRedirectData.NotificationType
 import com.howard.project.ui.view.FcmRedirectActivity
 
 object NotificationUtil {

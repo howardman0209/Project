@@ -176,6 +176,8 @@ abstract class BaseActivity : LocalizationActivity() {
 
     fun accountType() = getString(R.string.account_type)
 
+    fun appName() = getString(R.string.app_name)
+
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP) {
             val v = currentFocus
@@ -239,7 +241,7 @@ abstract class BaseActivity : LocalizationActivity() {
     }
 
     // Prevent unintended double/ multiple click
-    class PreventFastDoubleClick() {
+    class PreventFastDoubleClick {
         companion object {
             private var lastClickTime: Long = 0
 

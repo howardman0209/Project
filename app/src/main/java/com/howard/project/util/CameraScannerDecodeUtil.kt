@@ -1,31 +1,11 @@
 package com.howard.project.util
 
-import android.content.ContentResolver
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.provider.MediaStore
 import android.util.Log
 import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 
 object CameraScannerDecodeUtil {
-
-    fun getPicture(contentResolver: ContentResolver, selectedImage: Uri?): Bitmap? {
-        if (selectedImage == null)
-            return null
-
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        contentResolver.query(selectedImage, filePathColumn, null, null, null)?.also {
-            it.moveToFirst()
-            val columnIndex = it.getColumnIndex(filePathColumn[0])
-            val picturePath = it.getString(columnIndex)
-            it.close()
-            return BitmapFactory.decodeFile(picturePath)
-        }
-
-        return null
-    }
 
     private fun bitmapResize(imageBitmap: Bitmap): Bitmap {
         var bitmap = imageBitmap
