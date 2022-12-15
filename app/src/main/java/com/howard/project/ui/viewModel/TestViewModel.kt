@@ -25,7 +25,7 @@ class TestViewModel : BaseViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { showLoadingIndicator(false) }
                 .subscribe({
-                    Log.d(TAG, "Response: $it")
+                    Log.d(TAG, "ApiResponse: ${it.body()}")
                 }, {
                     throw it
                 })
