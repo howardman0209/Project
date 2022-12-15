@@ -16,10 +16,12 @@ import com.howard.project.extension.TAG
 import com.howard.project.extension.requireFilePermission
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewModel.TestViewModel
-import com.howard.project.util.*
+import com.howard.project.util.BUNDLE_CAMERA_SCANNER_RESULT
+import com.howard.project.util.BUNDLE_FCM_DATA
+import com.howard.project.util.GalleryImageUtil
+import com.howard.project.util.NotificationUtil
 import com.squareup.picasso.Picasso
 import java.io.File
-import java.io.IOException
 
 
 class TestActivity : MVVMActivity<TestViewModel, ActivityTestBinding>() {
@@ -78,8 +80,13 @@ class TestActivity : MVVMActivity<TestViewModel, ActivityTestBinding>() {
             popUpDialogSelect()
         }
 
-        binding.testButton4.setOnClickListener {
+        binding.testButton3.setOnLongClickListener {
             popUpDialogConfirm()
+            true
+        }
+
+        binding.testButton4.setOnClickListener {
+            viewModel.testingApi()
         }
 
         binding.testButton5.setOnClickListener {
@@ -124,16 +131,6 @@ class TestActivity : MVVMActivity<TestViewModel, ActivityTestBinding>() {
             .fit()
             .centerInside()
             .into(uploadedPreview)
-    }
-
-    private fun createTempFile(suffix: String): File? {
-        val temp = try {
-            File.createTempFile("jadx-tmp-", System.nanoTime().toString() + "-" + suffix)
-        } catch (e: IOException) {
-            Log.d(TAG, "Failed to create temp file with suffix: $suffix")
-            null
-        }
-        return temp
     }
 
     override fun getLayoutResId(): Int = R.layout.activity_test
