@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.howard.project.R
@@ -147,6 +148,15 @@ abstract class BaseActivity : LocalizationActivity() {
             permissionResult.it()
         }
         permCallbackMap.remove(permissionResult.requestCode)
+    }
+
+    open fun handleApiError(error: String) {
+        showNonDisruptiveApiError(error)
+    }
+
+    private fun showNonDisruptiveApiError(message: String) {
+        showLoadingIndicator(false)
+        Snackbar.make(findViewById(R.id.baseActivityViewGroup), message, Snackbar.LENGTH_LONG).show()
     }
 
     fun startAppSettings() {

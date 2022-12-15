@@ -30,7 +30,7 @@ abstract class MVVMFragment<VM : BaseViewModel, BINDING : ViewDataBinding> : Bas
     }
 
     protected open fun handleApiError(error: String) {
-//        baseActivity.handleApiError(error)
+        baseActivity.handleApiError(error)
         viewModel.apiError.value = null
     }
 

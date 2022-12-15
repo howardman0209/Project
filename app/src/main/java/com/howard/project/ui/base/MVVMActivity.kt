@@ -22,6 +22,12 @@ abstract class MVVMActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : Bas
             showLoadingIndicator(it == true)
         }
 
+        viewModel.apiError.observe(this) {
+            if (it != null) {
+                handleApiError(it)
+            }
+        }
+
     }
 
     @CallSuper
