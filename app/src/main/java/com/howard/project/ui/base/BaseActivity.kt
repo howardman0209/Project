@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.howard.project.R
 import com.howard.project.extension.TAG
 import com.howard.project.ui.model.PermissionRequest
@@ -162,6 +164,7 @@ abstract class BaseActivity : LocalizationActivity() {
             .setTitle(R.string.label_logout)
             .setPositiveButton(R.string.button_confirm) { _, _ ->
                 LoginManager.clearUserSession()
+                Firebase.auth.signOut()
 
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
