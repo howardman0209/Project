@@ -199,8 +199,7 @@ class LoginActivity : MVVMActivity<LoginViewModel, ActivityLoginBinding>() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             Log.d("FirebaseAuth", "Logged In")
-            // TODO: redirect to other page
-//            reload()
+            onSuccessLogin(currentUser)
         }
     }
 

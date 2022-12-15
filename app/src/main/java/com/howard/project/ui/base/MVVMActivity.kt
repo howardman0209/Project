@@ -18,13 +18,9 @@ abstract class MVVMActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : Bas
 
         setBindingData()
 
-//        progressDialog = ProgressDialog(this).create()
-
-
-//        viewModel.isShowLoading.observe(this) {
-//            showLoadingIndicator(it == true)
-//        }
-
+        viewModel.isShowLoading.observe(this) {
+            showLoadingIndicator(it == true)
+        }
 
     }
 
