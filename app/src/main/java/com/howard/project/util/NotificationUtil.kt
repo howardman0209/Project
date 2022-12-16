@@ -81,7 +81,7 @@ object NotificationUtil {
             "type" to NOTIFICATION_TYPE_TEST,
             "data" to "{\"testDataMessage\": \"$testData\"}",
         )
-        val largeIcon = constructLargeIconBitmap(context, R.mipmap.ic_launcher_a, 256, 256)
+        val largeIcon = constructLargeIconBitmap(context, R.mipmap.ic_launcher_new, 256, 256)
         displayNotification(context, largeIcon, message)
     }
 }

@@ -1,0 +1,12 @@
+package com.howard.project.util
+
+enum class NFCStatus {
+    NoOperation,
+    Tap,
+    Process,
+    Confirmation,
+    Read,
+    Write,
+    NotSupported,
+    NotEnabled,
+}

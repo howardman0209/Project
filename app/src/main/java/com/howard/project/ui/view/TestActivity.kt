@@ -16,10 +16,7 @@ import com.howard.project.extension.TAG
 import com.howard.project.extension.requireFilePermission
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewModel.TestViewModel
-import com.howard.project.util.BUNDLE_CAMERA_SCANNER_RESULT
-import com.howard.project.util.BUNDLE_FCM_DATA
-import com.howard.project.util.GalleryImageUtil
-import com.howard.project.util.NotificationUtil
+import com.howard.project.util.*
 import com.squareup.picasso.Picasso
 import java.io.File
 
@@ -50,6 +47,16 @@ class TestActivity : MVVMActivity<TestViewModel, ActivityTestBinding>() {
 
         if (result.resultCode == Activity.RESULT_OK) {
             Log.d(TAG, "cameraScannerLauncher result: ${result.data?.getStringExtra(BUNDLE_CAMERA_SCANNER_RESULT)}")
+        }
+    }
+
+    private val readNfcActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.data == null) return@registerForActivityResult
+
+        if (result.resultCode == Activity.RESULT_OK) {
+            Log.d(TAG, "readNfcActivityLauncher result: ${result.data?.getStringExtra(BUNDLE_READ_NFC_RESULT)}")
         }
     }
 
@@ -86,7 +93,14 @@ class TestActivity : MVVMActivity<TestViewModel, ActivityTestBinding>() {
         }
 
         binding.testButton4.setOnClickListener {
+//            startActivity(Intent(applicationContext, TestNfcActivity::class.java))
+            readNfcActivityLauncher.launch(Intent(applicationContext, ReadNFCActivity::class.java))
+//            startActivity(Intent(applicationContext, ReadNFCActivity::class.java))
+        }
+
+        binding.testButton4.setOnLongClickListener {
             viewModel.testingApi()
+            true
         }
 
         binding.testButton5.setOnClickListener {
