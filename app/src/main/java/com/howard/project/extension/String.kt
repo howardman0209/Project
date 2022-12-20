@@ -115,3 +115,13 @@ fun String.insert(insert: String, index: Int): String {
     val end = substring(index)
     return start + insert + end
 }
+
+fun String.hexToByteArray(): ByteArray {
+    //Add leading zero in case of odd len
+    val str = if (this.length and 1 == 1) {
+        "0$this"
+    } else
+        this
+    return str.trim().chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+
+}
