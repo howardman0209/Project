@@ -93,6 +93,7 @@ class ReadNFCActivity : MVVMActivity<ReadNFCViewModel, ActivityReadNfcBinding>()
             }
             Log.d("onTagDiscovered", "card: $card")
         }
+        isoDep.close()
 //        setResult(Activity.RESULT_OK, Intent().apply { putExtra(BUNDLE_READ_NFC_RESULT, msg) })
 //        finish()
     }
