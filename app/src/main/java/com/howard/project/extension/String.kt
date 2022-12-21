@@ -125,3 +125,13 @@ fun String.hexToByteArray(): ByteArray {
     return str.trim().chunked(2).map { it.toInt(16).toByte() }.toByteArray()
 
 }
+
+fun String.rotate(n: Int) = drop(n % length) + take(n % length)
+
+fun String.decodeHex(): String {
+    require(length % 2 == 0) { "Must have an even length" }
+    return chunked(2)
+        .map { it.toInt(16).toByte() }
+        .toByteArray()
+        .toString(Charsets.ISO_8859_1)  // Or whichever encoding your input uses
+}

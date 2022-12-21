@@ -7,18 +7,16 @@ import android.nfc.tech.IsoDep
 import android.os.Bundle
 import android.util.Log
 import com.howard.project.R
+import com.howard.project.data.CreditCardData
 import com.howard.project.databinding.ActivityReadNfcBinding
 import com.howard.project.extension.hexToByteArray
 import com.howard.project.extension.toHexString
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewModel.ReadNFCViewModel
-import com.howard.project.util.APDU_COMMAND_READ_RECORD_1
-import com.howard.project.util.APDU_COMMAND_READ_RECORD_2
-import com.howard.project.util.APDU_COMMAND_READ_RECORD_3
-import com.howard.project.util.APDU_RESPONSE_CODE_OK
+import com.howard.project.util.*
 import com.howard.project.util.ApduUtil.executeGPO
 import com.howard.project.util.ApduUtil.findAID
-import com.howard.project.util.ApduUtil.findPAN
+import com.howard.project.util.ApduUtil.findCARD
 import com.howard.project.util.ApduUtil.getRequiredPDOL
 import com.howard.project.util.ApduUtil.initCommand
 import com.howard.project.util.ApduUtil.selectAID
@@ -34,13 +32,6 @@ class ReadNFCActivity : MVVMActivity<ReadNFCViewModel, ActivityReadNfcBinding>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
-
-        val hexChars = "0123456789ABCDEF"
-        val hexToByteArray = hexChars.hexToByteArray()
-        val toHexString = hexToByteArray.toHexString()
-        Log.d(TAG, "hexChars :$hexChars")
-        Log.d(TAG, "hexToByteArray :${hexToByteArray}")
-        Log.d(TAG, "toHexString :${toHexString}")
     }
 
     override fun getLayoutResId(): Int = R.layout.activity_read_nfc
@@ -70,27 +61,6 @@ class ReadNFCActivity : MVVMActivity<ReadNFCViewModel, ActivityReadNfcBinding>()
         isoDep.connect()
         Log.d("onTagDiscovered", "isoDep: $isoDep")
 
-//        val response1 = isoDep.transceive("00A404000E315041592E5359532E444446303100".hexToByteArray())
-//        Log.d("onTagDiscovered", "response1: ${response1.toHexString()}")
-//
-//        val response2 = isoDep.transceive("00B2010C00".hexToByteArray())
-//        Log.d("onTagDiscovered", "response2: ${response2.toHexString()}")
-//
-//        val response3 = isoDep.transceive("00B2020C00".hexToByteArray())
-//        Log.d("onTagDiscovered", "response3: ${response3.toHexString()}")
-//
-//        val response4 = isoDep.transceive("00A4040007A000000003101000".hexToByteArray())
-//        Log.d("onTagDiscovered", "response4: ${response4.toHexString()}")
-//
-//        val response7 = isoDep.transceive("80A80000238321F0204000000000001000000000000000057800000000000978220202001212121200".hexToByteArray())
-//        Log.d("onTagDiscovered", "response7: ${response7.toHexString()}")
-//
-//        val response6 = isoDep.transceive("00B2010C00".hexToByteArray())
-//        Log.d("onTagDiscovered", "response6: ${response6.toHexString()}")
-//
-//        val response5 = isoDep.transceive("00B2020C00".hexToByteArray())
-//        Log.d("onTagDiscovered", "response5: ${response5.toHexString()}")
-
         isoDep.initCommand()
         val aid = isoDep.findAID()
         Log.d("onTagDiscovered", "AID: $aid")
@@ -99,22 +69,29 @@ class ReadNFCActivity : MVVMActivity<ReadNFCViewModel, ActivityReadNfcBinding>()
             val pdol = isoDep.getRequiredPDOL(selectAIDTlv)
             val executeGPOTlv = isoDep.executeGPO(pdol, applicationContext)
             Log.d("onTagDiscovered", "executeGPOTlv: $executeGPOTlv")
-            var pan = isoDep.findPAN(executeGPOTlv)
-            if (pan == null) {
-                val tlv1 = isoDep.transceive(APDU_COMMAND_READ_RECORD_1.hexToByteArray()).toHexString()
-                val tlv2 = isoDep.transceive(APDU_COMMAND_READ_RECORD_2.hexToByteArray()).toHexString()
-                val tlv3 = isoDep.transceive(APDU_COMMAND_READ_RECORD_3.hexToByteArray()).toHexString()
-                pan = if(tlv1.endsWith(APDU_RESPONSE_CODE_OK)){
-                    isoDep.findPAN(tlv1)
+            var card = isoDep.findCARD(executeGPOTlv)
+            if (card == null) {
+                val tlv1 = isoDep.transceive(APDU_COMMAND_READ_EF1_RECORD1.hexToByteArray()).toHexString()
+                val tlv2 = isoDep.transceive(APDU_COMMAND_READ_EF1_RECORD2.hexToByteArray()).toHexString()
+                val tlv3 = isoDep.transceive(APDU_COMMAND_READ_EF2_RECORD1.hexToByteArray()).toHexString()
+                card = if(tlv1.endsWith(APDU_RESPONSE_CODE_OK)){
+                    Log.d("onTagDiscovered", "tlv1: $tlv1")
+                    isoDep.findCARD(tlv1)
                 }else if(tlv2.endsWith(APDU_RESPONSE_CODE_OK)){
-                    isoDep.findPAN(tlv2)
+                    Log.d("onTagDiscovered", "tlv2: $tlv2")
+                    isoDep.findCARD(tlv2)
                 } else if (tlv3.endsWith(APDU_RESPONSE_CODE_OK)) {
-                    isoDep.findPAN(tlv3)
+                    Log.d("onTagDiscovered", "tlv3: $tlv3")
+                    isoDep.findCARD(tlv3)
                 }else{
-                    "4111111111111111"
+                    CreditCardData(
+                        pan = "4111111111111111",
+                        expiry = "12/35",
+                        cardHolderName = "TEST CARDHOLDER"
+                    )
                 }
             }
-            Log.d("onTagDiscovered", "pan: $pan")
+            Log.d("onTagDiscovered", "card: $card")
         }
 //        setResult(Activity.RESULT_OK, Intent().apply { putExtra(BUNDLE_READ_NFC_RESULT, msg) })
 //        finish()

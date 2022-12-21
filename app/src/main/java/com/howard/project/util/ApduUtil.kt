@@ -3,9 +3,8 @@ package com.howard.project.util
 import android.content.Context
 import android.nfc.tech.IsoDep
 import android.util.Log
-import com.howard.project.extension.TAG
-import com.howard.project.extension.hexToByteArray
-import com.howard.project.extension.toHexString
+import com.howard.project.data.CreditCardData
+import com.howard.project.extension.*
 import okhttp3.internal.toHexString
 import org.json.JSONObject
 
@@ -17,10 +16,10 @@ object ApduUtil {
     fun IsoDep.findAID(): String? {
         var aid: String? = null
 
-        var tlv = this.transceive(APDU_COMMAND_READ_RECORD_1.hexToByteArray()).toHexString()
+        var tlv = this.transceive(APDU_COMMAND_READ_EF1_RECORD1.hexToByteArray()).toHexString()
         Log.d(TAG, "tlv: $tlv")
         if (!tlv.contains("4f")) {
-            tlv = this.transceive(APDU_COMMAND_READ_RECORD_2.hexToByteArray()).toHexString()
+            tlv = this.transceive(APDU_COMMAND_READ_EF1_RECORD2.hexToByteArray()).toHexString()
             Log.d(TAG, "tlv: $tlv")
             if (!tlv.contains("4f")) {
                 Log.d(TAG, "aid not found: return null AID")
@@ -48,17 +47,6 @@ object ApduUtil {
         val tlv = this.transceive(apduCommand.hexToByteArray()).toHexString()
         Log.d(TAG, "tlv: $tlv")
         return tlv
-//        var tlv = this.transceive(APDU_COMMAND_READ_RECORD_1.hexToByteArray()).toHexString()
-//        Log.d(TAG, "tlv: $tlv")
-//        if (!tlv.contains("57")) {
-//            tlv = this.transceive(APDU_COMMAND_READ_RECORD_2.hexToByteArray()).toHexString()
-//            Log.d(TAG, "tlv: $tlv")
-//            if (!tlv.contains("57")) {
-//                Log.d(TAG, "aid null: return test card PAN")
-//                return "4111111111111111"
-//            }
-//        }
-//        Log.d(TAG, "tlv: $tlv")
     }
 
     fun IsoDep.getRequiredPDOL(tlv: String): String? {
@@ -136,22 +124,40 @@ object ApduUtil {
         }
     }
 
-    fun IsoDep.findPAN(tlv: String): String? {
+    fun IsoDep.findCARD(tlv: String): CreditCardData? {
         if (!tlv.endsWith(APDU_RESPONSE_CODE_OK)) {
             Log.d(TAG, "Fail to executeGPO, return test card PAN")
             return null
         } else {
             var pan: String? = null
+            var expiry: String? = null
+            var cardHolderName: String? = null
             // search for 5A tag - plain PAN
-            if (tlv.contains("5A")) {
+            if (tlv.contains("5A".lowercase())) {
                 pan = TlvUtil.findTagData("5A", tlv)
-            } else if (tlv.contains("57")) {
-                val tag57Data = TlvUtil.findTagData("57", tlv)
-                pan = tag57Data.substring(0, tag57Data.indexOf('d'))
             }
 
-//            Log.d(TAG, "5A and 57 Tag are missing, return test card PAN")
-            return pan
+            if (tlv.contains("57")) {
+                val tag57Data = TlvUtil.findTagData("57", tlv)
+                pan = tag57Data.substring(0, tag57Data.indexOf('d'))
+                val expiryData = tag57Data.substring(tag57Data.indexOf('d') + 1, tag57Data.indexOf('d') + 5)
+                expiry = expiryData.rotate(2).insert("/", 2)
+            }
+            Log.d(TAG, "HERE: tlv: $tlv - ${tlv.contains("5F20")}")
+            if (tlv.contains("5F20".lowercase())) {
+                val cardHolderNameData = TlvUtil.findTagData("5F20", tlv)
+                cardHolderName = cardHolderNameData.uppercase().decodeHex().trim()
+            }
+
+            return if (!pan.isNullOrEmpty()) {
+                CreditCardData(
+                    pan = pan,
+                    expiry = expiry,
+                    cardHolderName = cardHolderName
+                )
+            } else {
+                null
+            }
         }
     }
 }
