@@ -12,7 +12,7 @@ import com.howard.project.util.*
 
 inline fun BaseActivity.requireFilePermission(view: View, crossinline onSuccess: () -> Unit) {
     val requiredFilePermissions = listOfNotNull(
-        permission.READ_EXTERNAL_STORAGE,
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) permission.READ_EXTERNAL_STORAGE else permission.READ_MEDIA_IMAGES,
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) permission.WRITE_EXTERNAL_STORAGE else null
     ).toTypedArray()
 
