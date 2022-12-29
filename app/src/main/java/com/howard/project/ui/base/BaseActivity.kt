@@ -204,6 +204,7 @@ abstract class BaseActivity : LocalizationActivity() {
                 }
             }
         }
+
         return super.dispatchTouchEvent(event)
     }
 

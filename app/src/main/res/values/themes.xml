@@ -6,7 +6,7 @@
         <item name="android:windowLightStatusBar">true</item>
 
         <!--<item name="android:windowBackground">?android:colorBackground</item>-->
-        <item name="android:statusBarColor">@color/so_dark</item>
+        <item name="android:statusBarColor">@color/so_transparent</item>
         <item name="android:navigationBarColor">@color/so_dark</item>
 
         <!--In general our UI do not support touch at the same time and thus we should not-->

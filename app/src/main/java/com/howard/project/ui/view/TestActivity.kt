@@ -99,7 +99,7 @@ class TestActivity : MVVMActivity<TestViewModel, ActivityTestBinding>() {
         }
 
         binding.testButton4.setOnLongClickListener {
-            startActivity(Intent(applicationContext, TestNfcActivity::class.java))
+            startActivity(Intent(applicationContext, ApduActivity::class.java))
             true
         }
 
