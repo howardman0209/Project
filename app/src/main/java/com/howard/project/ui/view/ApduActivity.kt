@@ -13,13 +13,11 @@ import com.howard.project.databinding.ActivityApduBinding
 import com.howard.project.extension.hexToByteArray
 import com.howard.project.extension.toHexString
 import com.howard.project.ui.base.MVVMActivity
-import com.howard.project.ui.viewAdapter.ApduCommandAndResponseListAdapter
 import com.howard.project.ui.viewModel.ApduViewModel
 
 
 class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdapter.ReaderCallback {
     private var nfcAdapter: NfcAdapter? = null
-    private var recyclerViewAdapter = ApduCommandAndResponseListAdapter()
 
     companion object {
         private val TAG = TestNfcActivity::class.java.simpleName
@@ -28,13 +26,6 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
-
-//        binding.recyclerView.adapter = recyclerViewAdapter
-//        binding.recyclerView.layoutManager = AppBarLayoutManager(this)
-//        binding.recyclerView.itemAnimator = null
-
-
-        recyclerViewAdapter.setAdapterData(ArrayList(viewModel.apduCommandList))
 
         viewModel.cardResponse.observe(this) {
             Log.d("observe", "cardResponseList: ${viewModel.cardResponse}")
@@ -95,7 +86,6 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
     fun sendCommand() {
         if (!binding.etApduCommand.text.isNullOrEmpty()) {
             viewModel.apduCommandList.add(binding.etApduCommand.text.toString())
-            updateRecyclerView(viewModel.apduCommandList.toList(), recyclerViewAdapter)
             binding.apduCommandList.addView(
                 TextView(this).apply {
                     text = binding.etApduCommand.text.toString().uppercase()
@@ -115,12 +105,5 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
         binding.bouncyNestedScrollView.post {
             binding.bouncyNestedScrollView.fullScroll(ScrollView.FOCUS_DOWN)
         }
-//        binding.recyclerView.smoothScrollToPosition(viewModel.apduCommandList.size - 1)
-    }
-
-    private fun updateRecyclerView(dataList: List<String>, adapter: ApduCommandAndResponseListAdapter) {
-        Log.d("@@", "DataList: $dataList")
-        adapter.notifyItemInserted(dataList.size)
-        adapter.setAdapterData(ArrayList(dataList))
     }
 }
