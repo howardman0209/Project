@@ -9,17 +9,10 @@ import android.util.Log
 import com.howard.project.R
 import com.howard.project.data.CreditCardData
 import com.howard.project.databinding.ActivityReadNfcBinding
-import com.howard.project.extension.hexToByteArray
-import com.howard.project.extension.toHexString
+import com.howard.project.extension.*
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewModel.ReadNFCViewModel
 import com.howard.project.util.*
-import com.howard.project.util.ApduUtil.executeGPO
-import com.howard.project.util.ApduUtil.findAID
-import com.howard.project.util.ApduUtil.findCARD
-import com.howard.project.util.ApduUtil.getRequiredPDOL
-import com.howard.project.util.ApduUtil.initCommand
-import com.howard.project.util.ApduUtil.selectAID
 
 
 class ReadNFCActivity : MVVMActivity<ReadNFCViewModel, ActivityReadNfcBinding>(), NfcAdapter.ReaderCallback {
@@ -61,8 +54,8 @@ class ReadNFCActivity : MVVMActivity<ReadNFCViewModel, ActivityReadNfcBinding>()
         isoDep.connect()
         Log.d("onTagDiscovered", "isoDep: $isoDep")
 
-        isoDep.initCommand()
-        val aid = isoDep.findAID()
+        val selectDFTlv = isoDep.selectDF()
+        val aid = isoDep.findAID(selectDFTlv)
         Log.d("onTagDiscovered", "AID: $aid")
         aid?.let {
             val selectAIDTlv = isoDep.selectAID(it)
