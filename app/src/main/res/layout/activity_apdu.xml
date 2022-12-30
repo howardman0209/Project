@@ -27,10 +27,11 @@
             android:textAppearance="?textAppearanceTitleMedium"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.factor.bouncy.BouncyNestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/bouncyNestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toTopOf="@+id/tiApduCommand"
             app:layout_constraintTop_toBottomOf="@+id/tvApduCommand">
 
@@ -40,19 +41,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/space_default" />
-        </com.factor.bouncy.BouncyNestedScrollView>
-        <!--        <com.factor.bouncy.BouncyRecyclerView-->
-        <!--            android:id="@+id/recyclerView"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:clipToPadding="false"-->
-        <!--            android:nestedScrollingEnabled="false"-->
-        <!--            android:overScrollMode="always"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/tiApduCommand"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/tvApduCommand"-->
-        <!--            tools:itemCount="10"-->
-        <!--            tools:padding="@dimen/space_default" />-->
-
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiApduCommand"
@@ -94,10 +83,11 @@
             android:textAppearance="?textAppearanceTitleMedium"
             app:layout_constraintTop_toBottomOf="@+id/tiApduCommand" />
 
-        <com.factor.bouncy.BouncyNestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/bouncyNestedScrollView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCardResponse">
 
@@ -111,6 +101,6 @@
 
             </LinearLayout>
 
-        </com.factor.bouncy.BouncyNestedScrollView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
