@@ -75,6 +75,7 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
             viewModel.apduCommandList.forEachIndexed { index, element ->
                 val tlv = isoDep.transceive(element.hexToByteArray()).toHexString()
                 if (index == viewModel.apduCommandList.lastIndex) {
+                    Log.d("onTagDiscovered", "tlv: $tlv")
                     viewModel.cardResponse.postValue(tlv)
                 }
             }
