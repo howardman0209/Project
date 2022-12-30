@@ -8,6 +8,7 @@
     <string name="label_setting">Settings</string>
     <string name="label_type_here">Type here</string>
     <string name="label_apdu_command">APDU command</string>
+    <string name="label_card_response">Card response</string>
 
 <!--    bottom navigation tab label-->
     <string name="label_bottom_nav_tab1">tab1</string>

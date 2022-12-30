@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -18,22 +17,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/tvApduCommand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_default"
+            android:paddingTop="@dimen/space_default"
+            android:text="@string/label_apdu_command"
+            android:textAppearance="?textAppearanceTitleMedium"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <com.factor.bouncy.BouncyNestedScrollView
+            android:id="@+id/bouncyNestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="false"
-            android:paddingBottom="@dimen/space_default"
-            android:scrollbars="vertical"
-            android:transitionGroup="false"
             app:layout_constraintBottom_toTopOf="@+id/tiApduCommand"
-            app:layout_constraintTop_toTopOf="parent"
-            app:reverseLayout="true"
-            app:stackFromEnd="true"
-            tools:itemCount="10" />
+            app:layout_constraintTop_toBottomOf="@+id/tvApduCommand">
 
+            <LinearLayout
+                android:id="@+id/apduCommandList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/space_default" />
+        </com.factor.bouncy.BouncyNestedScrollView>
+        <!--        <com.factor.bouncy.BouncyRecyclerView-->
+        <!--            android:id="@+id/recyclerView"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:clipToPadding="false"-->
+        <!--            android:nestedScrollingEnabled="false"-->
+        <!--            android:overScrollMode="always"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/tiApduCommand"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/tvApduCommand"-->
+        <!--            tools:itemCount="10"-->
+        <!--            tools:padding="@dimen/space_default" />-->
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,10 +59,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_default"
-            android:layout_marginBottom="@dimen/space_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etApduCommand"
@@ -65,5 +83,34 @@
             android:src="@drawable/ic_baseline_send_24"
             app:layout_constraintBottom_toBottomOf="@+id/tiApduCommand"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCardResponse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_default"
+            android:paddingTop="@dimen/space_default"
+            android:text="@string/label_card_response"
+            android:textAppearance="?textAppearanceTitleMedium"
+            app:layout_constraintTop_toBottomOf="@+id/tiApduCommand" />
+
+        <com.factor.bouncy.BouncyNestedScrollView
+            android:id="@+id/bouncyNestedScrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCardResponse">
+
+            <LinearLayout
+                android:id="@+id/cardResponseList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/space_default">
+
+
+            </LinearLayout>
+
+        </com.factor.bouncy.BouncyNestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

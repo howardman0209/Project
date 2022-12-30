@@ -1,5 +1,7 @@
 package com.howard.project.ui.base
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,6 +14,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -183,6 +186,13 @@ abstract class BaseActivity : LocalizationActivity() {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    fun copyToClipboard(textToCopy: String, label: String? = "CopyContent") {
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText(label, textToCopy)
+        clipboard.setPrimaryClip(clip)
+        Toast.makeText(this, "Copied", Toast.LENGTH_SHORT).show()
     }
 
     fun isLoggedIn() = LoginManager.user != null

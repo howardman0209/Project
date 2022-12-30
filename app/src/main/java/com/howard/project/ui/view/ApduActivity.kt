@@ -2,15 +2,20 @@ package com.howard.project.ui.view
 
 import android.nfc.NfcAdapter
 import android.nfc.Tag
+import android.nfc.tech.IsoDep
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.RecyclerView.State
+import android.util.TypedValue
+import android.widget.ScrollView
+import android.widget.TextView
 import com.howard.project.R
 import com.howard.project.databinding.ActivityApduBinding
+import com.howard.project.extension.hexToByteArray
+import com.howard.project.extension.toHexString
 import com.howard.project.ui.base.MVVMActivity
 import com.howard.project.ui.viewAdapter.ApduCommandAndResponseListAdapter
 import com.howard.project.ui.viewModel.ApduViewModel
-import com.howard.project.uiComponent.AppBarLayoutManager
+
 
 class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdapter.ReaderCallback {
     private var nfcAdapter: NfcAdapter? = null
@@ -24,12 +29,32 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
         super.onCreate(savedInstanceState)
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
 
-        binding.recyclerView.adapter = recyclerViewAdapter
-        binding.recyclerView.layoutManager = AppBarLayoutManager(this)
-        binding.recyclerView.itemAnimator = null
+//        binding.recyclerView.adapter = recyclerViewAdapter
+//        binding.recyclerView.layoutManager = AppBarLayoutManager(this)
+//        binding.recyclerView.itemAnimator = null
 
 
         recyclerViewAdapter.setAdapterData(ArrayList(viewModel.apduCommandList))
+
+        viewModel.cardResponse.observe(this) {
+            Log.d("observe", "cardResponseList: ${viewModel.cardResponse}")
+            binding.cardResponseList.addView(
+                TextView(this).apply {
+                    text = it.uppercase()
+                    val outValue = TypedValue()
+                    context.theme.resolveAttribute(android.R.attr.selectableItemBackground, outValue, true)
+                    setBackgroundResource(outValue.resourceId)
+                    isClickable = true
+                    setOnClickListener {
+                        copyToClipboard(text.toString())
+                    }
+                }
+            )
+
+            binding.bouncyNestedScrollView2.post {
+                binding.bouncyNestedScrollView2.fullScroll(ScrollView.FOCUS_DOWN)
+            }
+        }
     }
 
 
@@ -53,18 +78,44 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
 
     override fun onTagDiscovered(tag: Tag?) {
         Log.d("onTagDiscovered", "NFC Tag: $tag")
-
+        val isoDep = IsoDep.get(tag)
+        isoDep.connect()
+        try {
+            viewModel.apduCommandList.forEachIndexed { index, element ->
+                val tlv = isoDep.transceive(element.hexToByteArray()).toHexString()
+                if (index == viewModel.apduCommandList.lastIndex) {
+                    viewModel.cardResponse.postValue(tlv)
+                }
+            }
+        } catch (e: Exception) {
+            Log.d("onTagDiscovered", "Exception: $e")
+        }
     }
 
     fun sendCommand() {
         if (!binding.etApduCommand.text.isNullOrEmpty()) {
             viewModel.apduCommandList.add(binding.etApduCommand.text.toString())
             updateRecyclerView(viewModel.apduCommandList.toList(), recyclerViewAdapter)
+            binding.apduCommandList.addView(
+                TextView(this).apply {
+                    text = binding.etApduCommand.text.toString().uppercase()
+                    val outValue = TypedValue()
+                    context.theme.resolveAttribute(android.R.attr.selectableItemBackground, outValue, true)
+                    setBackgroundResource(outValue.resourceId)
+                    isClickable = true
+                    setOnClickListener {
+                        copyToClipboard(text.toString())
+                    }
+                }
+            )
 
             binding.etApduCommand.text?.clear()
         }
         Log.d(TAG, "apduCommandList: ${viewModel.apduCommandList}")
-        binding.recyclerView.smoothScrollToPosition(viewModel.apduCommandList.size - 1)
+        binding.bouncyNestedScrollView.post {
+            binding.bouncyNestedScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+        }
+//        binding.recyclerView.smoothScrollToPosition(viewModel.apduCommandList.size - 1)
     }
 
     private fun updateRecyclerView(dataList: List<String>, adapter: ApduCommandAndResponseListAdapter) {

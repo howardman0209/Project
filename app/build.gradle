@@ -100,4 +100,8 @@ dependencies {
     // Fix okhttp crash in Android 11
     //noinspection GradleDependency
     implementation "io.grpc:grpc-okhttp:1.32.2"
+
+//    BouncyRecyclerView and BouncyNestedScrollView
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.github.valkriaine:Bouncy:2.3'
 }
