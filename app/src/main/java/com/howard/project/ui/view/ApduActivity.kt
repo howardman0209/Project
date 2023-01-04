@@ -20,7 +20,7 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
     private var nfcAdapter: NfcAdapter? = null
 
     companion object {
-        private val TAG = TestNfcActivity::class.java.simpleName
+        private val TAG = ApduActivity::class.java.simpleName
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +38,7 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
                     isClickable = true
                     setOnClickListener {
                         copyToClipboard(text.toString())
+                        Log.d(TAG, "tlv: $text")
                     }
                 }
             )
@@ -96,6 +97,7 @@ class ApduActivity : MVVMActivity<ApduViewModel, ActivityApduBinding>(), NfcAdap
                     isClickable = true
                     setOnClickListener {
                         copyToClipboard(text.toString())
+                        Log.d(TAG, "APDU Command: $text")
                     }
                 }
             )
